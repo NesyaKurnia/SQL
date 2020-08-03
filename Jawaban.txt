@@ -1,0 +1,96 @@
+JAWABAN NO. 1
+--> CREATE DATABASE myshop;
+
+JAWABAN NO. 2
+ -> use myshop (untuk pindah menuju database 
+"myshop"
+
+--> TABLE USERS : 
+CREATE TABLE users (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	name VARCHAR(255), 
+	email VARCHAR(255), 
+	password VARCHAR(255)
+);
+
+--> TABLE CATEGORIES : 
+CREATE TABLE categories (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	name VARCHAR(255)
+);
+
+--> TABLE ITEMS 
+CREATE TABLE items (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	name VARCHAR(255), 
+	description VARCHAR(255), 
+	price INT, 
+	stock INT, 
+	category_id INT, 
+	FOREIGN KEY(category_id) REFERENCES categories(id)
+);
+
+JAWABAN NO. 3
+--> TABLE USERS
+INSERT INTO users(name, email, password) VALUES ('John Doe', 'john@doe.com', 'john123');
+INSERT INTO users(name, email, password) VALUES ('Jane Doe', 'jane@doe.com', 'jenita123');
+
+--> TABLE CATEGORIES
+INSERT INTO categories(name) VALUES ('gadget');
+INSERT INTO categories(name) VALUES ('cloth');
+INSERT INTO categories(name) VALUES ('men');
+INSERT INTO categories(name) VALUES ('women');
+INSERT INTO categories(name) VALUES ('branded');
+
+--> TABLE ITEMS
+INSERT INTO items(name, description, price, stock, category_id) VALUE ('Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100, 1);
+INSERT INTO items(name, description, price, stock, category_id) VALUE ('Uniklooh', 'baju keren dari brand ternama', 500000, 50, 2);
+INSERT INTO items(name, description, price, stock, category_id) VALUE ('IMHO Watch','jam tangan anak yang jujur banget', 2000000, 10, 1);
+
+
+JAWABAN NO. 4
+A. 
+SELECT name, email FROM users;
++----------+--------------+
+| name     | email        |
++----------+--------------+
+| John Doe | john@doe.com |
+| Jane Doe | jane@doe.com |
++----------+--------------+
+
+B. 
+1.	 SELECT * FROM items WHERE price > 1000000;
++----+-------------+-----------------------------------+---------+-------+-------------+
+| id | name        | description                       | price   | stock | category_id |
++----+-------------+-----------------------------------+---------+-------+-------------+
+|  1 | Sumsang b50 | hape keren dari merek sumsang     | 4000000 |   100 |           1 |
+|  3 | IMHO Watch  | jam tangan anak yang jujur banget | 2000000 |    10 |           1 |
++----+-------------+-----------------------------------+---------+-------+-------------+
+
+2	SELECT * FROM items WHERE name LIKE '%watch%';
++----+------------+-----------------------------------+---------+-------+-------------+
+| id | name       | description                       | price   | stock | category_id |
++----+------------+-----------------------------------+---------+-------+-------------+
+|  3 | IMHO Watch | jam tangan anak yang jujur banget | 2000000 |    10 |           1 |
++----+------------+-----------------------------------+---------+-------+-------------+
+
+C.
+SELECT * FROM items AS i INNER JOIN categories AS c ON i.category_id = c.id;
++----+-------------+-----------------------------------+---------+-------+-------------+----+--------+
+| id | name        | description                       | price   | stock | category_id | id | name   |
++----+-------------+-----------------------------------+---------+-------+-------------+----+--------+
+|  1 | Sumsang b50 | hape keren dari merek sumsang     | 4000000 |   100 |           1 |  1 | gadget |
+|  2 | Uniklooh    | baju keren dari brand ternama     |  500000 |    50 |           2 |  2 | cloth  |
+|  3 | IMHO Watch  | jam tangan anak yang jujur banget | 2000000 |    10 |           1 |  1 | gadget |
++----+-------------+-----------------------------------+---------+-------+-------------+----+--------+
+
+JAWABAN NO. 5 
+UPDATE  items SET price='2500000' WHERE name= 'Sumsang b50';
+	--> SELECT * FROM items;
++----+-------------+-----------------------------------+---------+-------+-------------+
+| id | name        | description                       | price   | stock | category_id |
++----+-------------+-----------------------------------+---------+-------+-------------+
+|  1 | Sumsang b50 | hape keren dari merek sumsang     | 2500000 |   100 |           1 |
+|  2 | Uniklooh    | baju keren dari brand ternama     |  500000 |    50 |           2 |
+|  3 | IMHO Watch  | jam tangan anak yang jujur banget | 2000000 |    10 |           1 |
++----+-------------+-----------------------------------+---------+-------+-------------+
